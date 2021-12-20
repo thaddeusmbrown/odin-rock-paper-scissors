@@ -1,5 +1,5 @@
 function computerPlay() {
-    randomChance = Math.random();
+    let randomChance = Math.random();
     console.log(randomChance);
     if (randomChance<0.333) {
         return "rock";
@@ -14,31 +14,52 @@ function playRound(playerSelection, computerSelection) {
     playerSelection=playerSelection.toLowerCase();
     if (playerSelection=="rock") {
         if (computerSelection=="rock") {
-            return "Tie game! Rock ties Rock.";
+            console.log("Tie game! Rock ties Rock.");
+            return 0;
         } else if (computerSelection=="paper") {
-            return "You lose! Paper beats Rock";
+            console.log("You lose! Paper beats Rock");
+            return -1;
         } else {
-            return "You win! Rock beats Scissors";
+            console.log("You win! Rock beats Scissors");
+            return 1;
         }
     } else if (playerSelection=="paper") {
         if (computerSelection=="rock") {
-            return "You win! Paper beats Rock.";
+            console.log("You win! Paper beats Rock.");
+            return 1;
         } else if (computerSelection=="paper") {
-            return "You tie! Paper ties Paper";
+            console.log("You tie! Paper ties Paper");
+            return 0;
         } else {
-            return "You lose! Scissors beats Paper.";
+            console.log("You lose! Scissors beats Paper.");
+            return -1;
         }
     } else {
         if (computerSelection=="rock") {
-            return "You lose! Rock beats Scissors.";
+            console.log("You lose! Rock beats Scissors.");
+            return -1;
         } else if (computerSelection=="paper") {
-            return "You win! Scissors beats Paper";
+            console.log("You win! Scissors beats Paper");
+            return 1;
         } else {
-            return "You tie! Scissors ties Scissors.";
+            console.log("You tie! Scissors ties Scissors.");
+            return 0;
         }
     }
 }
 
-const playerSelection = "ScissorS";
-const computerSelection = computerPlay();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    let roundCounter = 0;
+    let score = 0; //if >0, player is winning
+    while (roundCounter < 5) {
+        score += playRound(prompt("Choose Rock, Paper, or Scissors."), computerPlay());
+        roundCounter++;
+    }
+    if (score>0) {
+        console.log("Player wins!");
+    } else if (score == 0) {
+        console.log("Tie game!");
+    } else {
+        console.log("Computer wins!");
+    }
+}
